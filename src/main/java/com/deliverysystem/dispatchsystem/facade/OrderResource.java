@@ -22,7 +22,6 @@ public class OrderResource {
     this.orderService = orderService;
   }
 
-
   @PostMapping("/")
   public ResponseEntity<String> createOrder(@RequestBody Order order) {
     int orderId = order.getOrderId();
@@ -31,7 +30,8 @@ public class OrderResource {
       orderService.createOrder(order);
       return ResponseEntity.status(HttpStatus.CREATED).body("Created an Order with id: " + orderId);
     } catch (RestaurantNotFoundException ex) {
-      return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Unable to find restaurant of ID: " + restaurantId);
+      return ResponseEntity.status(HttpStatus.NOT_FOUND)
+          .body("Unable to find restaurant of ID: " + restaurantId);
     }
   }
 }
